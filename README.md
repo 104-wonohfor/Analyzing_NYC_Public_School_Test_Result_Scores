@@ -179,31 +179,8 @@ LIMIT 10
 
 
 
-```python
-%%nose
-last_output = _
-
-def test_task1_output_type():
-    assert str(type(last_output)) == "<class 'sql.run.ResultSet'>", \
-    "Please ensure an SQL ResultSet is the output of the code cell." 
-
-results = last_output.DataFrame()
-
-def test_task1_results():
-    assert results.shape == (10, 7), \
-    "The results should have fourteen columns and ten rows."
-    assert set(results.columns) == set(['school_name', 'borough', 'building_code', 'average_math', 'average_reading', 'average_writing', 'percent_tested']), \
-    'The results should include all columns from the database, without using an alias.'
-    assert last_output.DataFrame().loc[0, 'building_code'] == "M022", \
-    "The building code for the first school should be M022."
-```
 
 
-
-
-
-
-    2/2 tests passed
 
 
 
@@ -248,32 +225,6 @@ FROM schools
 
 
 
-```python
-%%nose
-last_output = _
-last_output_df = last_output.DataFrame()
-
-def test_task2_columns():
-    assert last_output_df.shape == (1, 2), \
-    "Did you correctly select the data? Expected the result to contain one row and two columns?"
-    assert set(last_output_df.columns) == set(["num_tested_missing", "num_schools"]), \
-    "Did you use the alias `num_tested_missing` and also select the `num_schools` column?"
-
-def test_task2_output():
-    assert last_output_df.iloc[0, 0] == 20, \
-    """Did you correctly calculate `"num_tested_missing"?"""
-    assert last_output_df.iloc[0, 1] == 375, \
-    """Did you correctly calculate the total number of rows in the database?"""  
-```
-
-
-
-
-
-
-    2/2 tests passed
-
-
 
 
 ## 3. Schools by building code
@@ -312,26 +263,7 @@ FROM schools
 
 
 
-```python
-%%nose
-last_output = _
-last_output_df = last_output.DataFrame()
 
-def test_task3_column_name():
-    assert last_output_df.columns.tolist() == ["num_school_buildings"], \
-    "Did you use the correct alias for the number of unique school buildings?"
-
-def test_task3_value():
-    assert last_output_df.values.tolist() == [[233]], \
-    "Did you use the correct method to calculate how many unique school buildings are in the database? Expected a different value."
-```
-
-
-
-
-
-
-    2/2 tests passed
 
 
 
@@ -415,34 +347,13 @@ ORDER BY average_math DESC
 
 
 
-```python
-%%nose
-last_output = _
-last_output_df = last_output.DataFrame()
-
-def test_task4_columns():
-    assert set(last_output_df.columns) == set(["school_name", "average_math"]), \
-    "Did you select the correct columns?"
-
-def test_task4_filter():
-    assert last_output_df["average_math"].min() >= 640, \
-    """Did you correctly filter for "average_math" scores more than or equal to 640?"""
-    assert last_output_df.shape == (10, 2), \
-    """The output has the wrong number of results, did you correctly filter the "average_math" column?"""
-
-def test_task4_values():
-    assert last_output_df.iloc[0,0] == "Stuyvesant High School", \
-    """Did you run the correct query? Expected the first school to be "Stuyvesant High School"."""
-    assert last_output_df.iloc[0,1] == 754.0, \
-    """Did you correctly sort the values by "average_math" in descending order? Expected a different range of results."""
-```
 
 
 
 
 
 
-    3/3 tests passed
+
 
 
 
@@ -485,26 +396,6 @@ LIMIT 1
 
 
 
-```python
-%%nose
-last_output = _
-last_output_df = last_output.DataFrame()
-
-def test_task5_value():  
-    assert last_output_df["lowest_reading"].values.tolist() == [302.0], \
-    """Did you select the minimum value for the "average_reading" column?"""
-
-def test_task5_alias():
-    assert last_output_df.columns.tolist() == ["lowest_reading"], \
-    """Did you use the correct alias? Expected "lowest_reading"."""
-```
-
-
-
-
-
-
-    2/2 tests passed
 
 
 
@@ -553,30 +444,7 @@ LIMIT 1
 
 
 
-```python
-%%nose
-last_output = _
-last_output_df = last_output.DataFrame()
 
-def test_task6_columns():
-    assert set(last_output_df.columns) == set(["school_name", "max_writing"]), \
-    """Did you select "average_writing" and use an alias?"""
-    
-def test_task6_shape():
-    assert last_output_df.shape[0] == 1, \
-    "Did you select the correct number of values? Expected one row."
-
-def test_task6_values():
-    assert last_output_df.values.tolist() == [['Stuyvesant High School', 693.0]], \
-    """Did you select the maximum value for "average_writing"? Expected a different value."""  
-```
-
-
-
-
-
-
-    3/3 tests passed
 
 
 
@@ -662,36 +530,9 @@ LIMIT 10
 
 
 
-```python
-%%nose
-last_output = _
-last_output_df = last_output.DataFrame()
-
-def test_task7_columns():
-    assert set(last_output_df.columns) == set(["school_name", "average_sat"]), \
-    """Did you select the correct columns and use an alias for the sum of the three sat score columns?"""
-    
-def test_task7_shape():
-    assert last_output_df.shape[0] == 10, \
-    "Did you limit the number of results to ten?"
-    assert last_output_df.shape[1] == 2, \
-    """Expected your query to return two columns: "school_name" and "average_sat"."""
-
-def test_task7_values():
-    assert last_output_df.iloc[0].values.tolist() == ['Stuyvesant High School', 2144], \
-    """Did you correctly define your query? Expected different values for the first school."""
-    assert last_output_df["average_sat"].min() == 1889, \
-    """Did you correctly filter the results? Expected a different lowest score for "average_sat"."""  
-    assert last_output_df["average_sat"].max() == 2144, \
-    """Did you correctly calculate the "average_sat" column? Expected a different top score."""
-```
 
 
 
-
-
-
-    3/3 tests passed
 
 
 
@@ -762,44 +603,6 @@ ORDER BY average_borough_sat DESC
 
 
 
-```python
-%%nose
-last_output = _
-last_output_df = last_output.DataFrame()
-
-def test_task8_columns():
-    assert set(last_output_df.columns) == set(['borough', 'num_schools', 'average_borough_sat']), \
-    """Did you select the correct columns and use aliases for the number of schools and average sat scores?"""
-
-def test_task8_shape():
-    assert last_output_df.shape[0] == 5, \
-    "Did you group by the correct column? Expected five rows to be returned: one for each borough."
-    assert last_output_df.shape[1] == 3, \
-    """Expected your query to return three columns: "borough", "num_schools", and "average_borough_sat"."""
-
-def test_task8_values():
-    # Each assert statement checks values per row 
-    assert last_output_df.iloc[0].values.tolist() == ['Staten Island', 10, 1439], \
-    """Did you correctly define your query? Expected different values for Staten Island."""
-    assert last_output_df.iloc[1].values.tolist() == ['Queens', 69, 1345], \
-    """Did you correctly define your query? Expected different values for Queens."""
-    assert last_output_df.iloc[2].values.tolist() == ['Manhattan', 89, 1340], \
-    """Did you correctly define your query? Expected different values for Manhattan."""
-    assert last_output_df.iloc[3].values.tolist() == ['Brooklyn', 109, 1230], \
-    """Did you correctly define your query? Expected different values for Brooklyn."""
-    assert last_output_df.iloc[4].values.tolist() == ['Bronx', 98, 1202], \
-    """Did you correctly define your query? Expected different values for the Bronx."""
-    # Check lowest average_reading score is in the last row
-    assert last_output_df.iloc[-1, 0] == 'Bronx', \
-    """Did you sort the results by "average_sat" in descending order?"""
-```
-
-
-
-
-
-
-    3/3 tests passed
 
 
 
@@ -865,40 +668,7 @@ LIMIT 5
 
 
 
-```python
-%%nose
-last_output = _
-last_output_df = last_output.DataFrame()
 
-def test_task9_columns():
-    assert last_output_df.columns.tolist() == ['school_name', 'average_math'], \
-    """Did you select the correct columns? Expected "school_name" and "average_math"."""
-    
-def test_task9_shape():
-    assert last_output_df.shape[0] == 5, \
-    "Did you limit the output to 5 rows?"
-    assert last_output_df.shape[1] == 2, \
-    "Did you select the correct number of columns? Expected two."
-    
-def test_task9_school_names():
-    assert last_output_df["school_name"].tolist() == ['Brooklyn Technical High School', 'Brooklyn Latin School', 'Leon M. Goldstein High School for the Sciences', 'Millennium Brooklyn High School', 'Midwood High School'], \
-    "Did you correctly filter by borough? Expected a different list of school names."
-    
-def test_task9_values():
-    assert last_output_df["average_math"].max() == 682, \
-    """Did you select the correct values? Expected a maximum value of 682.0 for "average_math"."""    
-    assert last_output_df["average_math"].min() == 550, \
-    """Did you select the correct values? Expected a minimum value of 550.0 for "average_math"."""
-    assert last_output_df["average_math"].values.tolist() == [682, 625, 563, 553, 550], \
-    """Did you sort by "average_math" in descending order? Expected different values."""
-```
-
-
-
-
-
-
-    4/4 tests passed
 
 
 
