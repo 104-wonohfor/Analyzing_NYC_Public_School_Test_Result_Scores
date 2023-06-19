@@ -1,4 +1,3 @@
-link: [https://colab.research.google.com/drive/1KX_LdQNtDPmazM541i6R-lpsKlASqTdf?usp=sharing](https://colab.research.google.com/drive/1KX_LdQNtDPmazM541i6R-lpsKlASqTdf?usp=sharing)
 ---
 jupyter:
   colab:
@@ -12,6 +11,7 @@ jupyter:
   nbformat_minor: 0
 ---
 
+link: [https://colab.research.google.com/drive/1KX_LdQNtDPmazM541i6R-lpsKlASqTdf?usp=sharing](https://colab.research.google.com/drive/1KX_LdQNtDPmazM541i6R-lpsKlASqTdf?usp=sharing)
 <div class="cell markdown" id="Xm4-tmDcnzG2">
 
 **Đề bài**
